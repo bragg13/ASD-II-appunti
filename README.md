@@ -256,6 +256,27 @@ int studentePigro(int v[], int t[], int n, int V){
 }
 ```
 
+## NUMERO DI ALBERI BINARI - calcolare il numero di alberi binari strutturalmente diversi (e k limitati)
+```py
+int kLimitato(int n, int k){
+    int DP[][] = new int[0...n][0...k] = {-1}
+    kLimitatoR(DP, n, k)
+    return DP[n][k]
+}
+
+int kLimitatoR(int DP[][], int n, int k){
+    if k<0:
+        return 0    # ho cercato di costruire un albero troppo profondo
+    elif n<=1:
+        return 1    # ho un albero
+    else:
+        if DP[n][k] < 0:
+            DP[n][k] = 0
+            for i=0 to n-1:
+                DP[n][k] = DP[n][k] + kLimitatoR(DP, i, k-1) * kLimitatoR(DP, n-1, i-1, k-1)
+    return DP[n][k]
+}
+```
 
 <br><hr><br>
 
