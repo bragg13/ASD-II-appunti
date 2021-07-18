@@ -356,6 +356,27 @@ solve(){
 ```
 
 
+## COLORING - si può colorare un grafo non orientato con al max k colori, in modo che ogni nodo sia diverso dagli adiacenti?
+```py
+bool coloring(Graph G, int k, int S[], int u){
+    set C = {1...k}
+    foreach v in u.adj():
+        if S[v] != 0:
+            C.remove(S[v])
+    foreach c in C:
+        S[u] = c
+        if u==G.n:
+            printSol(S, G.n)
+            return true
+        else
+            if coloring(G, k, S, u+1):
+                return true
+        S[u] = 0
+    return false
+}
+```
+
+
 <br><hr><br>
 
 
