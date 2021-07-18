@@ -278,6 +278,34 @@ int kLimitatoR(int DP[][], int n, int k){
 }
 ```
 
+
+## MASSIMIZZARE NUMERO DI MONETE PER PAGARE T - problema del resto
+```py
+int maxResto(int V[], int i, int t, int DP[][]){
+    if i==0 and t>0:
+        return -INF         # ho ancora resto da dare, ma non ho piu monete
+    if t<0:
+        return -INF         # ho un resto negativo
+    if t==0:
+        return 0            # ho finito
+    if DP[i][t] == -1:      # scelgo il max tra skippare la moneta o prenderla e sottrarre il valore che rimane
+        DP[i][t] = max(maxResto(V, i-1, t, DP), maxResto(V, i-1, t-V[i], DP)
+    return DP[i][t]
+    
+# Se dovessi contare il numero di modi in cui pagare invece
+int resto(int V[], int i, int t, int DP[][]){
+    if t==0:
+        return 1
+    if t<0 or i==0:
+        return 0
+    if DP[i][t] == -1:
+        DP[i][t] = resto(V, i-1, t, DP) + resto(V, i, t-V[i], DP)
+    return DP[i][t]
+}
+```
+
+
+
 <br><hr><br>
 
 
