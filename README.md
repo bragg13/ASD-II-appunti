@@ -305,6 +305,30 @@ int resto(int V[], int i, int t, int DP[][]){
 ```
 
 
+## SCACCHIERA - numero di percorsi distinti da 0,0 a m,n (0/1 se attraversabile o meno)
+```py
+int countPercorsi(int M[][], int m, int n){
+    int DP[][] = new int[0...m][0...n]
+    DP[m][n] = M[m][n]
+    for i=m-1 to 0:
+        DP[i][n] = M[i][n]*DP[i+1][n]
+    for j=n-1 to 0:
+        DP[m][j] = M[m][j]*DP[m][j+1]
+    for i=m-1 to 0:
+        for j=n-1 to 0:
+            DP[i][j] = M[i][j]*(DP[i][j+1] + DP[i+1][j])
+    return DP[0][0]
+}
+```
+
+
+## DADI - numero di modi diversi con cui ottenere una certa somma
+![image](https://user-images.githubusercontent.com/33253698/126070133-a1303e79-83ce-45bd-82f1-708d219f5a07.png)
+```py
+    404 code not found
+```
+
+
 
 <br><hr><br>
 
@@ -330,3 +354,15 @@ solve(){
     enumerate(scelte, 0, n, m)
 }
 ```
+
+
+<br><hr><br>
+
+
+# === Flusso ===
+## BALLO DI FINE ANNO
+![image](https://user-images.githubusercontent.com/33253698/126070889-9ec41c2b-97fe-4b78-8000-f6b60652ebf8.png)
+![image](https://user-images.githubusercontent.com/33253698/126070903-0abc832e-9da0-4228-84ca-faaf4a09f199.png)
+![image](https://user-images.githubusercontent.com/33253698/126070913-47a9afd0-31f0-48da-b047-d1d37010d6f6.png)
+
+
