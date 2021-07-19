@@ -128,6 +128,20 @@ int strMatch(int P[], int T[], int m, int n){
 ```
 
 
+## SOTTOSTRINGA PALINDROMA MASSIMALE
+> DP[i][j] è la lunghezza della piu lunga sottostringa palindroma contenuta in S[i...j]
+> notare che j-i+1 è la lunghezza della sottostringa
+```py
+maxPalSubs(int s[], int n, int i, int j, int DP[][]{
+    if j-i+1 <= 1:
+        return j-i+1
+    if s[i] == s[j] and maxPalSubs(s, n, i+1, j-1, DP) == j-i+1:    # se 0 ed n sono uguali e in mezzo ho una palindroma, allora è palindroma
+        return j-i+1
+    return max( maxPalSubs(s, n, i+1, j, DP), maxPalSubs(s, n, i, j-1, DP) )    # else prendo la subs massimale scegliendo tra levare un char a dx o sx
+}
+```
+
+
 ## PRODOTTO DI CATENA DI MATRICI - trovare una parentesizzazione ottima per minimizzare il costo del prodotto
 > DP[i][j] è il minimo numero di moltiplicazioni scalari da fare per calcolare A[i...j]. 
 > se i==j, DP[i][j]=0, altrimenti il numero di molt è dato DP[i][k]+DP[k+1][j] + il costo per moltiplicare. Ne cerco il minimo;
@@ -316,6 +330,24 @@ int resto(int V[], int i, int t, int DP[][]){
         DP[i][t] = resto(V, i-1, t, DP) + resto(V, i, t-V[i], DP)
     return DP[i][t]
 }
+
+# Se avessi un numero illimitato di monete, e dovessi calcolare se posso dare resto R con massimo k monete
+int limRemainder(int v[], int n, int R, int k){
+    int DP[][] = new int[0...n][0...R][0...k] = {-1}
+    return limRec(v, n, R, k, DP)
+}
+
+int limRec(int v[], int i, int r, int j, int DP[][]){
+    if r<0:
+        return false
+    if r==0:
+        return true
+    if i==0 or j==0:
+        return false
+    if DP[i][r][j] == -1:
+        DP[i][r][j] = limRec(v, i, r-v[i], j--, DP) or limRec(v, i-1, r, j, DP)
+    return DP[i][r][j]
+}
 ```
 
 
@@ -420,4 +452,9 @@ bool coloring(Graph G, int k, int S[], int u){
 ![Schermata da 2021-07-19 09-17-06](https://user-images.githubusercontent.com/33253698/126118660-1c97c735-fb2c-46a5-9696-3feb0f8e961b.png)
 ![Schermata da 2021-07-19 09-18-19](https://user-images.githubusercontent.com/33253698/126118759-60a70170-23bb-4246-b349-619327c96790.png)
 
+
+## WORKSHOPs
+![image](https://user-images.githubusercontent.com/33253698/126140513-f6962a88-a8b7-4487-8662-5c1b6dae3018.png)
+![image](https://user-images.githubusercontent.com/33253698/126140566-6bcac8bf-f58e-4bdd-8a9b-9148c029a782.png)
+![image](https://user-images.githubusercontent.com/33253698/126140620-816fe820-f86a-427e-bcba-e28d3e28cb0c.png)
 
