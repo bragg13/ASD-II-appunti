@@ -201,6 +201,20 @@ int longestIncreasing(int V[], int n){
 ```
 
 
+## LUNGHEZZA DELLA MASSIMA SOTTOSEQUENZA CRESCENTE DISTINTA - data una stringa
+> ![image](https://user-images.githubusercontent.com/33253698/126119749-83372ac8-cbe8-422c-958c-49a971da3fd6.png)
+> Tuttavia, il modo piu semplice per risolvere questo problema è rendersi conto che è sufficiente utilizzare l’algoritmo LCS, chiamato
+passando questa stringa e la stringa ABCDEFGHIJKLMNOPQRSTUVWXYZ. Il costo di questa soluzione è pari a Θ(n), in quanto deve
+essere riempita una matrice n × 26.
+```py
+int maxOrdinataDistinta(ITEM[ ] S, int n){
+    int DP[][] = new int[0...n][0...26]
+    lcs(M, S, ”ABCDEFGHIJKLMNOPQRSTUVWXYZ”, n, 26)
+    return DP[m, n]
+}
+```
+
+
 ## DONALD - Devo scegliere un sottoinsieme di citta che massimizzi il numero di elettori, tenendo conto di una distanza minima tra le citta
 > DP[i] è il massimo numero di elettori che posso avere nelle prime i città. La soluzione è in DP[n]
 ```py
@@ -322,6 +336,21 @@ int countPercorsi(int M[][], int m, int n){
 ```
 
 
+## MIN MOVES - numero minimo di mosse in un vettore per andare da 0 a n (ogni casella contiene il max di passi possibili da lì)
+```py
+minMoves(int V[], int n){
+    int S[] = new int[0...n]
+    S[n] = 0                    # andare da n ad n mi costa 0
+    for i=n-1 to 0:
+        S[i] = +INF             # effettuo una mossa e mi metto nella posizione che
+        for k=0 to V[i]:        # poi richede il minor numero di mosse
+            if i+k <= n and S[i+k]+1 < S[i]:
+                S[i] = S[i+k] + 1
+    return S[n]
+}
+```
+
+
 ## DADI - numero di modi diversi con cui ottenere una certa somma
 ![image](https://user-images.githubusercontent.com/33253698/126070133-a1303e79-83ce-45bd-82f1-708d219f5a07.png)
 ```py
@@ -385,5 +414,10 @@ bool coloring(Graph G, int k, int S[], int u){
 ![image](https://user-images.githubusercontent.com/33253698/126070889-9ec41c2b-97fe-4b78-8000-f6b60652ebf8.png)
 ![image](https://user-images.githubusercontent.com/33253698/126070903-0abc832e-9da0-4228-84ca-faaf4a09f199.png)
 ![image](https://user-images.githubusercontent.com/33253698/126070913-47a9afd0-31f0-48da-b047-d1d37010d6f6.png)
+
+
+## REGOLAMENO DEL DISI
+![Schermata da 2021-07-19 09-17-06](https://user-images.githubusercontent.com/33253698/126118660-1c97c735-fb2c-46a5-9696-3feb0f8e961b.png)
+![Schermata da 2021-07-19 09-18-19](https://user-images.githubusercontent.com/33253698/126118759-60a70170-23bb-4246-b349-619327c96790.png)
 
 
