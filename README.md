@@ -82,6 +82,36 @@ int knapsackRec(int peso[], int valore[], int n, int c, int DP[], int pos[]){
 ```
 
 
+## 3DKNAPSACK - matrice a tre dimensioni aka con un constraint in piu
+> trovare il valore della somma massimale (k,w)-vincolata, cioè il piu grande valore ottenibile
+> come somma di k valori tale che sia minore/uguale a w; DP[i][s][v] è il massimo valore ottenibile
+> usando i primi i elementi, scegliendo al massimo s valori, non dovendo superare v
+```py
+int kwConstraint(int X[], int n, int k, int w){
+    int DP[][][] = new int [0...n][0...k][0...w]
+    for i=0 to n:
+        for s=0 to k:
+            for v=0 to w:
+                DP[i][s][v] = -1            # init
+    return kwConstraintRec(X, n, k, w, DP)
+}
+
+int kwConstraintRec(int X[], int i, int s, int v, int DP[][][]){
+    if i==0 or s==0 or v==0:
+        return 0                # se non ho piu elementi da/che posso scegliere o v è finito, ho 0 modi
+    if DP[i][s][v]<0:
+        if X[i]>v:              # se il numero è troppo grande non posso sommarlo, non lo prendo
+            DP[i][s][v] = kwConstraintRec(X, i--, s, v, DP) 
+        else:
+            DP[i][s][v] = max(
+                kwConstraintRec(X, i--, s, v, DP),
+                kwConstraintRec(X, i--, s--, v-X[i], DP)+X[i],  # prendo: levo il valore dalla somma, 
+            )                                                   # diminuisco le scelte possibili e sommo il valore
+    return DP[i][s][v]
+}
+```
+
+
 ## SOTTOSEQUENZA COMUNE MASSIMALE - date due sequenze T ed U, quanto sono simili tra loro?
 ```py
 int lcs(int T[], int U[], int n, int m){
@@ -390,6 +420,9 @@ minMoves(int V[], int n){
 ```
 
 
+## MONTRESOR INVESTMENT COMPANY - massimizzare il profitto comprando e vendendo azioni, sapendo i prezzi di n giorni
+![image](https://user-images.githubusercontent.com/33253698/126392866-e5a2c9ce-9d29-464a-a8fc-cec0be5dd31c.png)
+
 
 <br><hr><br>
 
@@ -434,6 +467,61 @@ bool coloring(Graph G, int k, int S[], int u){
                 return true
         S[u] = 0
     return false
+}
+```
+
+
+## PRINT SUMS - stampare tutti i modi in cui posso ottenere w sommando i valori di X[]
+```py
+void printSums(int S[], int X[], int i, int n, int w){
+    if i==n:                                        # se sono arrivato a 0 e ho finito
+        if v==0:                                    # gli elementi, stampo
+            print(S)
+    else:
+        for c in [0, 1]:
+            S[i] = c                                # prendo/non prendo
+            printSums(S, X, i++, n, w-c*X[i])       # se moltiplico per 0 non sottraggo
+}
+```
+
+
+## DOVE COMPARE IL "+"? - data una stringa di interi, dire le possibili combinazioni come somme
+```py
+printAllRec(int S[], int n, bool stop[], int i){
+    if i==0:
+        print(S[0])
+        for i=1 to n:
+            if stop[i]:
+                print("+")
+            print(S[i])
+        println()
+    else:
+        for c in [True, False]:
+            stop[i] = c
+            printAllRec(S, n, stop, i-1)
+}
+```
+
+
+## CAMMINI LUNGHI K IN UN GRAFO - stampare tutti i cammini lunghi k a partire da un nodo s
+```py
+visit(Graph G, int k, int s){
+    bool visited[] = new bool[0...G.length] = {False}
+    int path[] = new int[0...k]
+    visitRec(G, k, s, 0, path, visited)
+}
+
+visitRec(Graph G, int k, Node u, int i, int path[], bool visited[]){
+    path[i] = u
+    if i==k:
+        print path
+    else:
+        visited[u] = True
+        for v in G.adj(u):
+            if not visited[v]:
+                visitRec(G, k, i++, v, path, visited)
+        visited[u] = False
+
 }
 ```
 
