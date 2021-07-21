@@ -12,6 +12,8 @@ int domino(int n){
 }
 ```
 
+<br>
+
 ## HATEVILLE - prendo/non prendo: quantita massima che posso raccogliere
 > posso prendere la donazione di i (skippando precedente e successiva) o non prenderla (passando alla prossima)
 ```py
@@ -24,7 +26,12 @@ int hateville(int D[], int n){
         DP[i] = max(DP[i-1], DP[i-2]+D[i]) # non prendo - prendo
     return DP[n]
 }
+
+# C'è anche una versione `bits(int n)` in cui bisogna contare il numero di sringhe binarie ottenibili di n bit
+# che non contengono bit 1 consecutivi. Il procedimento è lo stesso, ma devo sommare e non prendere il max
 ```
+
+<br>
 
 ## KNAPSACK - massimizzare il profitto ottenuto, con constraint del peso massimo
 > DP[i][c] è il massimo profitto ottenibile dai primi i oggetti per capacità massima c => DP[n][C]
@@ -47,6 +54,8 @@ int knapsack(int peso[], int valore[], int n, int C){
 }
 ```
 
+
+<br>
 
 ## KNAPSACK senza limiti - posso selezionare piu volte lo stesso elemento
 > utilizo memoization e memorizzo l'indice da cui deriva il massimo per ricostruire la soluzione
@@ -82,10 +91,13 @@ int knapsackRec(int peso[], int valore[], int n, int c, int DP[], int pos[]){
 ```
 
 
+<br>
+
 ## 3DKNAPSACK - matrice a tre dimensioni aka con un constraint in piu
 > trovare il valore della somma massimale (k,w)-vincolata, cioè il piu grande valore ottenibile
 > come somma di k valori tale che sia minore/uguale a w; DP[i][s][v] è il massimo valore ottenibile
 > usando i primi i elementi, scegliendo al massimo s valori, non dovendo superare v
+Complex: $O(nkw)$
 ```py
 int kwConstraint(int X[], int n, int k, int w){
     int DP[][][] = new int [0...n][0...k][0...w]
@@ -112,6 +124,8 @@ int kwConstraintRec(int X[], int i, int s, int v, int DP[][][]){
 ```
 
 
+<br>
+
 ## SOTTOSEQUENZA COMUNE MASSIMALE - date due sequenze T ed U, quanto sono simili tra loro?
 ```py
 int lcs(int T[], int U[], int n, int m){
@@ -131,6 +145,8 @@ int lcs(int T[], int U[], int n, int m){
 }
 ```
 
+
+<br>
 
 ## STRING MATCHING APPROSSIMATO - dato un pattern p e un testo t, esiste un'occorrenza k-approssimata di p in t [con k minimo]?
 > approssimato significa che ci son due caratteri diversi, che un carattere di p non è in t o viceversa [per un max di k errori]
@@ -158,6 +174,8 @@ int strMatch(int P[], int T[], int m, int n){
 ```
 
 
+<br>
+
 ## SOTTOSTRINGA PALINDROMA MASSIMALE
 > DP[i][j] è la lunghezza della piu lunga sottostringa palindroma contenuta in S[i...j]
 > notare che j-i+1 è la lunghezza della sottostringa
@@ -171,6 +189,8 @@ maxPalSubs(int s[], int n, int i, int j, int DP[][]{
 }
 ```
 
+
+<br>
 
 ## PRODOTTO DI CATENA DI MATRICI - trovare una parentesizzazione ottima per minimizzare il costo del prodotto
 > DP[i][j] è il minimo numero di moltiplicazioni scalari da fare per calcolare A[i...j]. 
@@ -201,6 +221,8 @@ int computeParentesizzazione(int c[], int n){
 ```
 
 
+<br>
+
 ## INSIEME INDIPENDENTE DI INTERVALLI PESATI - dato un insieme di intervalli, devo trovare un sottoinsieme indipendente per massimizzare il profitto
 > prendo il massimo tra non prendere e passare al prossimo (DP[i-1]) e prendere questo e il predecessore (DP[pred_i] + valore_i)
 ```py
@@ -225,7 +247,10 @@ int[] maxInterval(int a[], int b[], int valore[], int n){
 ```
 
 
+<br>
+
 ## MASSIMA SOTTOSEQUENZA CRESCENTE
+Complex: $O(n^2)$
 ```py
 int longestIncreasing(int V[], int n){
     int DP[] = new int[0...n]
@@ -238,12 +263,15 @@ int longestIncreasing(int V[], int n){
                 DP[i] = DP[j] + 1
                 if DP[i] > _max:
                     _max = DP[i]
+                # DP[i] = max(DP[i], DP[j]+1)
     
     return _max
     # return max(DP)
 }
 ```
 
+
+<br>
 
 ## LUNGHEZZA DELLA MASSIMA SOTTOSEQUENZA CRESCENTE DISTINTA - data una stringa
 > ![image](https://user-images.githubusercontent.com/33253698/126119749-83372ac8-cbe8-422c-958c-49a971da3fd6.png)
@@ -258,6 +286,8 @@ int maxOrdinataDistinta(ITEM[ ] S, int n){
 }
 ```
 
+
+<br>
 
 ## DONALD - Devo scegliere un sottoinsieme di citta che massimizzi il numero di elettori, tenendo conto di una distanza minima tra le citta
 > DP[i] è il massimo numero di elettori che posso avere nelle prime i città. La soluzione è in DP[n]
@@ -275,6 +305,8 @@ int donald(int miglia[], int elett[], int n, int minD){
 }
 ```
 
+
+<br>
 
 ## BATTERIE - minimizzare il numero di fermate per completare il viaggio
 > ogni fermata ha un costo e una distanza; c'è una distanzaMin dopo cui per forza devo fermarmi
@@ -298,6 +330,8 @@ int minStops(int D[], int C[], int n, int r){
 ```
 
 
+<br>
+
 ## COME PASSARE L'ESAME - minimizzzare il tempo impiegato per fare un totale di esercizi tc la somma dei valori sia V
 > se non ho esercizi e devo ottenere v>0, ci metterò +INF
 > se devo ottenere v=0, ci metto 0 perche non devo fare esercizi
@@ -313,6 +347,8 @@ int studentePigro(int v[], int t[], int n, int V){
                                                             # l'ultimo (se c'è, orelse 0)
 }
 ```
+
+<br>
 
 ## NUMERO DI ALBERI BINARI - calcolare il numero di alberi binari strutturalmente diversi (e k limitati)
 ```py
@@ -336,6 +372,8 @@ int kLimitatoR(int DP[][], int n, int k){
 }
 ```
 
+
+<br>
 
 ## MASSIMIZZARE NUMERO DI MONETE PER PAGARE T - problema del resto
 ```py
@@ -381,6 +419,8 @@ int limRec(int v[], int i, int r, int j, int DP[][]){
 ```
 
 
+<br>
+
 ## SCACCHIERA - numero di percorsi distinti da 0,0 a m,n (0/1 se attraversabile o meno)
 ```py
 int countPercorsi(int M[][], int m, int n){
@@ -398,6 +438,8 @@ int countPercorsi(int M[][], int m, int n){
 ```
 
 
+<br>
+
 ## MIN MOVES - numero minimo di mosse in un vettore per andare da 0 a n (ogni casella contiene il max di passi possibili da lì)
 ```py
 minMoves(int V[], int n){
@@ -413,6 +455,8 @@ minMoves(int V[], int n){
 ```
 
 
+<br>
+
 ## DADI - numero di modi diversi con cui ottenere una certa somma
 ![image](https://user-images.githubusercontent.com/33253698/126070133-a1303e79-83ce-45bd-82f1-708d219f5a07.png)
 ```py
@@ -420,8 +464,38 @@ minMoves(int V[], int n){
 ```
 
 
+<br>
+
 ## MONTRESOR INVESTMENT COMPANY - massimizzare il profitto comprando e vendendo azioni, sapendo i prezzi di n giorni
 ![image](https://user-images.githubusercontent.com/33253698/126392866-e5a2c9ce-9d29-464a-a8fc-cec0be5dd31c.png)
+
+
+<br>
+
+## NUMERO DI MODI PER RAPPRESENTARE UNA STRINGA COME SOMMATORIA
+Complex: $O(n^4)$ perche ho una tabella potenzialmente $n\times n$, e per riempire ogni cella ho $O(n^2)$
+```py
+int countSum(int V[], int k){
+    int DP[][] = new int[0...n][0...k]
+    for i=0 to n:
+        for r=0 to k:
+            DP[i][r] = -1
+    return countRec(V, n, k, DP)
+}
+
+int countRec(int V[], int i, int r, int DP[][]){
+    if i==0 and r==0:                       # 1 modo per ottenere 0 
+        return 1                            # non avendo termini da sommare
+    if (i>0 and r<=0) or (i==0 and r>0):    # 0 modi per ottenere negativo/nullo sommando positivi
+        return 0                            # 0 modi per ottenere positivo se non ho termini da sommare
+
+    if DP[i][r] == -1:                      # spezzo le i cifre rimanenti in due parti (con s)
+        DP[i][r] = 0                        # e applico ricors la sommtoria da 0 a s-1
+        for s=0 to i:                       
+            DP[i][r] = DP[i][r] + countRec(V, s--, r-value(V, s, i), DP)
+    return DP[i][r]
+}
+```
 
 
 <br><hr><br>
@@ -450,6 +524,8 @@ solve(){
 ```
 
 
+<br>
+
 ## COLORING - si può colorare un grafo non orientato con al max k colori, in modo che ogni nodo sia diverso dagli adiacenti?
 ```py
 bool coloring(Graph G, int k, int S[], int u){
@@ -471,7 +547,10 @@ bool coloring(Graph G, int k, int S[], int u){
 ```
 
 
+<br>
+
 ## PRINT SUMS - stampare tutti i modi in cui posso ottenere w sommando i valori di X[]
+Complex: $O(n\cdot 2^n)$
 ```py
 void printSums(int S[], int X[], int i, int n, int w){
     if i==n:                                        # se sono arrivato a 0 e ho finito
@@ -485,7 +564,10 @@ void printSums(int S[], int X[], int i, int n, int w){
 ```
 
 
+<br>
+
 ## DOVE COMPARE IL "+"? - data una stringa di interi, dire le possibili combinazioni come somme
+Complex: $O(n\cdot 2^n)$ (ho $2^{n-1}$ possibili combinazioni, piu il tempo per stamparle aka $O(n)$)
 ```py
 printAllRec(int S[], int n, bool stop[], int i){
     if i==0:
@@ -502,6 +584,8 @@ printAllRec(int S[], int n, bool stop[], int i){
 }
 ```
 
+
+<br>
 
 ## CAMMINI LUNGHI K IN UN GRAFO - stampare tutti i cammini lunghi k a partire da un nodo s
 ```py
@@ -526,23 +610,155 @@ visitRec(Graph G, int k, Node u, int i, int path[], bool visited[]){
 ```
 
 
+<br>
+
+## STAMPARE TUTTE LE SEQUENZE DI INDICI DI T CHE GENERANO UN PATTERN P
+Complex: $O(2^n)$
+```py
+printAll(item T[], item P[], int i, int j, Stack S){        
+    if j==0:
+        print S
+    else if i>= j:
+        printAll(T, P, i--, j, S)       # ignoro l'ultimo carattere
+
+        if T[i] == P[j]:                # prendo l'ultimo carattere
+            S.push(i)
+            printAll(T, P, i--, j--, S)
+            S.pop()
+}
+```
+
+
+<br>
+
+## STAMPARE TUTTE LE SOMME PALINDROME DI N
+Complex: $O(n\cdot 2^{n/2}$) dove $O(n)$ è per la stampa
+```py
+genRec(int S[], int i, int missing){
+    for k=0 to i-1:
+        print(S[k])
+    if missing>0:
+        print missing
+    for k=i-1 to 0:
+        print(S[k])
+    for j=0 to missing/2:
+        S[i] =j
+        genRec(S, i++, missing-2*j)
+}
+
+generate(int n){
+    int S[] = new int[0...n/2]
+    genRec(S, 0, n)
+}
+```
+
+
 <br><hr><br>
 
 
 # === Flusso ===
+<br>
+
 ## BALLO DI FINE ANNO
 ![image](https://user-images.githubusercontent.com/33253698/126070889-9ec41c2b-97fe-4b78-8000-f6b60652ebf8.png)
 ![image](https://user-images.githubusercontent.com/33253698/126070903-0abc832e-9da0-4228-84ca-faaf4a09f199.png)
 ![image](https://user-images.githubusercontent.com/33253698/126070913-47a9afd0-31f0-48da-b047-d1d37010d6f6.png)
 
 
+<br>
+
 ## REGOLAMENO DEL DISI
 ![Schermata da 2021-07-19 09-17-06](https://user-images.githubusercontent.com/33253698/126118660-1c97c735-fb2c-46a5-9696-3feb0f8e961b.png)
 ![Schermata da 2021-07-19 09-18-19](https://user-images.githubusercontent.com/33253698/126118759-60a70170-23bb-4246-b349-619327c96790.png)
 
+
+<br>
 
 ## WORKSHOPs
 ![image](https://user-images.githubusercontent.com/33253698/126140513-f6962a88-a8b7-4487-8662-5c1b6dae3018.png)
 ![image](https://user-images.githubusercontent.com/33253698/126140566-6bcac8bf-f58e-4bdd-8a9b-9148c029a782.png)
 ![image](https://user-images.githubusercontent.com/33253698/126140620-816fe820-f86a-427e-bcba-e28d3e28cb0c.png)
 
+
+<br>
+
+## HATEVILLE
+IMG
+
+
+<br><hr><br>
+
+
+# === Cammini Minimi ===
+## Problema
+> Un **cammino** p è un insieme (ordinato?) di nodi $v_1...v_k$. Il peso di quel cammino è la somma dei costi degli archi che lo compongono.
+Il cammino minimo da _s_ ad _u_ è un cammino il cui costo è minore o uguale di qualsiasi altro cammino tra gli stessi nodi.
+
+> Un **albero di copertura** di G è un sottografo tale che
+> - sia un albero
+> - i suoi archi siano sottoinsieme degli archi di G
+> - contenga tutti i vertici di G
+
+<br>
+
+## Cammini minimi a sorgente *singola*
+### Teorema di Bellman
+> Una soluzione è **ammissibile** quando può essere descritta da 
+> - un albero di copertura radicato in s 
+> - un vettore di distanza
+
+> Una soluzione ammissibile $T$ è **ottima** se e solo se
+> - per ogni arco $(u,v)\in T$, la distanza di v è uguale alla distanza di u + il peso di $(u,v)$
+> - per ogni arco $(u,v)\in E$, la distanza di v è minore/uguale alla distanza di u + il peso di $(u,v)$
+
+<br>
+
+### Algoritmo generico
+- Ho una struttura dati a cui aggiungo i nodi man mano, e dei booleani in cui segno quali nodi sono nella struttura dati
+- Finche la struttura non è vuota, estraggo uno ad uno i nodi e itero nei suoi adiacenti
+- Se la distanza all'adiacente v è minore dell'attuale (inizialmente +INF) e non è nella struttura, la aggiorno e lo inserisco. (e segno il padre)
+- Se è già nella struttura... dipende dall'algoritmo
+
+<br>
+
+### Dijkstra
+Funziona bene solo con pesi positivi. Sfrutta le code con priorità (inzialmente basate su vettori, con costo O(n)).
+Estraggo il nodo con priorità minima e cancello la sua priorità
+
+Ho complessità O(n^2)
+IMMAGINE PAG 27
+
+<br>
+
+### Johnson
+Code con priorità, basate però su heap binario che riduce il costo a O(m logn) (COS'È M?)
+
+<br>
+
+### Fredman-Tarjan
+Code con priorità, basate però su heap di Fibonacci che riduce il costo *ammortizzato* a O(m + nlogn) (COS'È M?)
+
+<br>
+
+### Bellman-Ford-Moore
+È più pesante di Dijkstra, ma funziona con archi di peso negativo. Utilizzo una coda. Non faccio nulla nel caso in cui il nodo sia già nella coda. Ha complessità O(nm) perche ogni nodo puo essere estratto massimo n-1 volte.
+
+IMMAGINE PAG 37
+
+<br>
+
+### DAG
+Poiche non esistono cicli non rischio di tornare su un nodo gia visitato e abbassare il valore della sua distanza. Posso utilizzare l'ordinamento topologico
+
+IMMAGINE PAG 39
+
+
+<br>
+
+## Cammini minimi a *sorgente multipla*
+Potrei ripetere Dijkstra o Johnson o Bellman Fork (per grafi densi o sparsi o con peso negativo) aumentando di un fattore n la complessità.
+Altrimenti posso usare FloydWarshall o Johnson per sorgente multipla
+
+> Un cammino tra x e y è *k-vincolato* se non passa per nessun vertice v>k.
+
+> La distanza *k-vincolata* tra x e y è il costo totale del cammino minimo k-vincolato tra x e y (se esiste, altrimenti è +INF)
