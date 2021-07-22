@@ -557,6 +557,8 @@ int countPercorsi(int M[][], int m, int n){
     return DP[0][0]
 }
 ```
+> Se ho anche un budget e ogni casella mi indica il costo, diventa tridimensionale
+> ![image](https://user-images.githubusercontent.com/33253698/126708520-b1326942-ab8b-45fd-a00c-bae7136aa6df.png)
 
 
 <br>
