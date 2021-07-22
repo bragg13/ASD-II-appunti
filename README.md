@@ -93,13 +93,37 @@ int knapsackRec(int peso[], int valore[], int n, int c, int DP[], int pos[]){
 
 <br>
 
+## ZAINO LEGGERO - dato un vettore di pesi W dare la dimensione del piu piccolo sottinsieme tale per cui i pesi sommati diano la capacità
+```py
+int smallSum((int W[], int n, int C){
+    int DP[][] = new int[0...n][0...C]
+    return ssRec(W, n, C)
+}
+
+int ssRec(int W[], int i, int c, int DP[][]){
+    if c<0:
+        return INF
+    elif c==0:
+        return 0
+    elif i==0:
+        return INF
+    else:
+        if DP[i][c] == -1:
+            DP[i][c] = min(ssRec(W, i-1, c, DP), ssRec(W, i-1, c-W[i], DP) + 1)
+        return DP[i][c]
+}
+```
+
+
+<br>
+
 ## 3DKNAPSACK - matrice a tre dimensioni aka con un constraint in piu
 > trovare il valore della somma massimale (k,w)-vincolata, cioè il piu grande valore ottenibile
 > come somma di k valori tale che sia minore/uguale a w; DP[i][s][v] è il massimo valore ottenibile
 > usando i primi i elementi, scegliendo al massimo s valori, non dovendo superare v
 Complex: $O(nkw)$
 ```py
-int kwConstraint(int X[], int n, int k, int w){
+int kwConstraint(int X[], int n, int k, int w){2020
     int DP[][][] = new int [0...n][0...k][0...w]
     for i=0 to n:
         for s=0 to k:
@@ -415,6 +439,7 @@ int kLimitato(int n, int k){
     return DP[n][k]
 }
 
+# binari k limitati
 int kLimitatoR(int DP[][], int n, int k){
     if k<0:
         return 0    # ho cercato di costruire un albero troppo profondo
@@ -427,8 +452,47 @@ int kLimitatoR(int DP[][], int n, int k){
                 DP[n][k] = DP[n][k] + kLimitatoR(DP, i, k-1) * kLimitatoR(DP, n-1, i-1, k-1)
     return DP[n][k]
 }
+
+# normali
+int sameVisit(int n){
+    int DP[] = new int[0...n]
+    DP[0] = DP[1] = 1
+    for i=2 to n:
+        DP[i] = 0
+        for k=0 to i-1:
+            DP[i] = DP[i] + DP[k] * DP[n-k-1]
+    return DP[n]
+}
 ```
 
+
+<br>
+
+## k-PARTITION aka HARMONYVILLE - trovare una partizione del vettore di costo minimo che divide il vettore in k sottovettori
+Complex: $O(kn^2)$
+```py
+int partitipn(int V[], int n, int k){
+    int DP[][] = new int[0...n][0...k] = {-1}
+    int tot[] = new int[0...n]
+    tot[0] = v[0]
+    for i=1 to n:
+        tot[i] = tot[i-1] + V[i]
+    return partitionRec(V, tot, DP, n, k)
+}
+
+int partitionRec(int V[], int tot[], int DP[][], int i, int t){
+    if t>i:
+        return +INF
+    elif t==1:
+        return tot[i]
+    elif DP[i][t] == -1:
+        DP[i][t] = +INF
+        for j=0 to i-1:
+            int cost = max(partitionRec(V, tot, DP, j, t-1), tot[i]-tot[j])
+            DP[i][t] = min(DP[i][t], cost)
+    return DP[i][t]
+}
+```
 
 <br>
 
@@ -844,6 +908,27 @@ printRec(int S[], int open, int toOpen, int toClose, int i){
         if toClose > 0:
             S[i] = ")"
             printRec(S, open-1, toOpen, toClose-1, i+1)
+}
+```
+
+
+<br>
+
+## STAMPARE TUTTI I MODI PER OTTENERE n COME SOMMMA DI k NUMERI PRIMI IN P
+Complex: $O(n^k)$
+```py
+primes(int P[], int p, int k, int n){
+    int S[] = new int[0...k]
+    primesRec(P, S, p, k, n)
+}
+
+primesRec(int P[], int S[], int p int k, int n){
+    if n==0 and k==0:
+        print S
+    elif p>0 and k>0 and n>0:
+        primesRec(P, S, p--, k, n)
+        S[k] = P[p]
+        primesRec(P, S, p--, k--, n-P[p])
 }
 ```
 
