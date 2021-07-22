@@ -127,21 +127,49 @@ int kwConstraintRec(int X[], int i, int s, int v, int DP[][][]){
 <br>
 
 ## SOTTOSEQUENZA COMUNE MASSIMALE - date due sequenze T ed U, quanto sono simili tra loro?
+Complex: $O(nm)$
 ```py
+# in caso di una sottostringa comune massimale (contigua), guardare i commenti, che si riferiscono alle righe precedenti il commento
 int lcs(int T[], int U[], int n, int m){
     DP = new int[0...n][0...m]
     for i=0 to n:
         DP[i][0] = 0
     for j=0 to m:
         DP[0][j] = 0
+    # -4 int maxSoFar = 0
 
     for i=1 to n:
         for j=1 to m:
             if T[i] == S[j]:
                 DP[i][j] = DP[i-1][j-1] + 1   # se gli ultimi caratteri sono uguali, calcolo la scm snza contarli e sommo 1 (length)
+                # + maxSoFar = max(maxSoFar, DP[i][j])
             else:
                 DP[i][j] = max( DP[i-1][j], DP[i][j-1] ) # se son diversi, calcolo la migliore che avrei togliendo l'ultimo carattere ad ognuno
+                # - DP[i][j] = 0
     return DP[n][m]
+    # - return maxSoFar
+}
+```
+
+
+<br>
+
+## MIN REMOVE - minimo numero di elementi da rimuovere da un vettore per far si che max(A)-min(A) <= k
+Complex: $O(n)$
+```py
+# Approcio Greedy
+int minRemove(int A[], int n, int k){
+    sort(A, n)
+    int i=0
+    int j=0
+    int maxSoFar = 0
+    while i<=n and j<=n:
+        if A[j] - A[i] <= k:
+            maxSoFar = max(maxSoFar, j-i+1)
+            j += 1
+        else:
+            i += 1
+    return n - maxSoFar
 }
 ```
 
@@ -227,7 +255,7 @@ int computeParentesizzazione(int c[], int n){
 > prendo il massimo tra non prendere e passare al prossimo (DP[i-1]) e prendere questo e il predecessore (DP[pred_i] + valore_i)
 ```py
 int[] maxInterval(int a[], int b[], int valore[], int n){
-    # ordino gli intervalli per estremi di fine crescenti
+    # ordino gli intervalli per estremi di fine crescenti: O(nlogn)
     int pred[] = computePred(a, b, n)
     int DP[] = new int[0...n]
     DP[0] = 0
@@ -243,6 +271,18 @@ int[] maxInterval(int a[], int b[], int valore[], int n){
             S.insert(i)
             i = pred[i]
     return S
+}
+
+# O(n^2), ma ne esiste una versione nlogn
+computePredecessor(int a[], int b[], int n){
+    int pred[] = new int[0...n]
+    p[0] = 0
+    for i=1 to n:
+        j = i-1
+        while j>0 and b[j] > a[i]:
+            j--
+        pred[i] = j
+    return pred
 }
 ```
 
@@ -267,6 +307,23 @@ int longestIncreasing(int V[], int n){
     
     return _max
     # return max(DP)
+}
+```
+
+
+<br>
+
+## SEQUENZA K-LIMITATA MASSIMALE
+Complex: $O(n^2)$
+```py
+int ksequence(int A[], int n, int k){
+    int DP[] = new int[0...n]
+    for i=0 to n:
+        DP[i] = A[i]
+        for j=0 to i-1:
+            if |A[j]-A[i]| <= k and DP[j] + A[i] > DP[i]:
+                DP[i] = DP[j] + A[i]
+    return max(DP)
 }
 ```
 
@@ -498,6 +555,46 @@ int countRec(int V[], int i, int r, int DP[][]){
 ```
 
 
+<br>
+
+## OTTENERE K COME SOMMA DEGLI ELEMENTI DI UN VETTORE A
+Complex: $O(nr)$
+```py
+int countMenu(int A[], int n, int k){
+    int DP[] = new int[0...n][0...k] = {-1}
+    return countRec(A, n, k, DP)
+}
+
+int countRec(int A[], int i, int r, int DP[]){
+    if r==0:
+        return 1            # per ottenere 0 ho un solo modo: non selezionare elementi
+    elif i==0:
+        return 0            # se non ho elementi da sommare, non posso ottenere r
+    else:
+        if DP[i][r] == -1:
+            DP[i][r] = countRec(A, i--, r, DP)
+            if A[i] <= r:
+                DP[i][r] = DP[i][r] + countRec(A, i--, r-A[i], DP)
+        return DP[i][r]
+}  
+```
+
+
+<br>
+
+## VALORE DEL SOTTOVETTORE DI LUNGHEZZA PARI DI SOMMA MASSIMALE
+Complex: $\Theta(n)$
+```py
+int maxSumEven(int A[], int n){
+    int DP[] = new int[0...n]
+    DP[0] = DP[1] = 0
+    for i=2 to n:
+        DP[i] = max(DP[i-2]+A[i-1]+A[i], 0)
+    return max(DP, n)
+}
+```
+
+
 <br><hr><br>
 
 
@@ -612,6 +709,57 @@ visitRec(Graph G, int k, Node u, int i, int path[], bool visited[]){
 
 <br>
 
+## LONGEST PATH - lunghezza del percorso piu lungo formato da 1 che inizia in 1,1
+Complex: $O(4^{nm})$
+```py
+int longestPath(int M[][], int n, int m){
+    return longestPathRec(M, n, m, 1, 1)
+}
+
+int longestPathRec(int M[][], int n, int m, int i, int j){
+    if 1<=i<=n and 1<=j<=m and M[i][j] == 1:
+        M[i][j] = -1            # come se mettessi True su visited
+        int _max = 1 + max(
+                        longestPathRec(M, n, m, i+1, j)                            
+                        longestPathRec(M, n, m, i-1, j)                            
+                        longestPathRec(M, n, m, i, j+1)                            
+                        longestPathRec(M, n, m, i, j-1)
+        )
+        M[i][j] = 1
+        return _max
+    else:
+        return 0
+}
+```
+
+
+<br>
+
+## CICLI HAMILTONIANI IN UN GRAFO
+```py
+printHamilton(Graph G){
+    bool visited[] = new bool[0...G.length] = {False}
+    int path[] = new int[0...G.size]
+    visitRec(G, 0, 0, path, visited)
+}
+
+visitRec(Graph G, Node u, int i, int path[], bool visited[]){
+    path[i] = u
+    if i==G.size:
+        print path
+    else:
+        visited[u] = True
+        for v in G.adj(u):
+            if not visited[v]:
+                visitRec(G, v, i++, path, visited)
+        visited[u] = False
+
+}
+```
+
+
+<br>
+
 ## STAMPARE TUTTE LE SEQUENZE DI INDICI DI T CHE GENERANO UN PATTERN P
 Complex: $O(2^n)$
 ```py
@@ -625,6 +773,29 @@ printAll(item T[], item P[], int i, int j, Stack S){
             S.push(i)
             printAll(T, P, i--, j--, S)
             S.pop()
+}
+```
+
+
+<br>
+
+## STAMPARE TUTTE LE SOTTOSEQUENZE CRESCENTI DI UN VETTORE
+Complex: $O(n\cdot 2^n)$
+```py
+printIncreasing(int A[], int n){
+    Stack S = Stack()
+    printRec(A, n, S)
+}
+
+printRec(int A[], int i, Stack S){
+    if i==0:
+        print S
+    else:
+        if S.empty() or A[i] < S.pop():
+            S.push(A[i])
+            printRec(A, i--, S)
+            S.pop()
+        printRec(A, i--, S)
 }
 ```
 
@@ -653,10 +824,56 @@ generate(int n){
 ```
 
 
+<br>
+
+## STAMPARE TUTTE LE POSSIBILI PARENTESIZZAZIONI COMPOSTE DA N COPPIE DI PARENTESI
+Complex: $\Omega(ncdot 2^n)$
+```py
+printPar(int n){
+    Item S[] = new Item[2*n]
+    printRec(S, 0, n, n, 0) 
+}
+
+printRec(int S[], int open, int toOpen, int toClose, int i){
+    if toOpen == 0 and toClose == 0:
+        print S
+    else:
+        if toOpen > 0:
+            S[i] = "("
+            printRec(S, open+1, toOpen-1, toClose, i+1)
+        if toClose > 0:
+            S[i] = ")"
+            printRec(S, open-1, toOpen, toClose-1, i+1)
+}
+```
+
+
 <br><hr><br>
 
 
 # === Flusso ===
+## FORD FULKERSON
+```py
+int[][] maxFlox(Graph G, Node S, Node T, int c[][]){
+    int f[][] = new int [][]                # Flusso parziale
+    int g[][] = new int [][]                # Flusso da cammino aumentante
+    int r[][] = new int [][]                # Rete residua
+
+    for x,y in G.V():
+        f[x][y] = 0                         # Inizializza un flusso nullo
+        r[x][y] = c[x][y]                   # Copia c (capacita?) in r
+    
+    repeat:
+        g = flusso associato ad un cammino aumentante in r (oppure f di 0)
+        for x,y in G.V():
+            f[x][y] = f[x][y] + g[x][y]     # f = f+g
+            r[x][y] = c[x][y] - f[x][y]     # Calcola c di f
+    until g==f di 0
+    return f
+}
+```
+
+
 <br>
 
 ## BALLO DI FINE ANNO
