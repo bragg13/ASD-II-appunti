@@ -605,8 +605,7 @@ minMoves(int V[], int n){
 <br>
 
 ## NUMERO DI ALBERI 1 BILANCIATI DIVERSI DI ALTEZZA H
-
-![image-20210723160941511](/home/andrea/.config/Typora/typora-user-images/image-20210723160941511.png)
+![image](https://user-images.githubusercontent.com/33253698/126801895-851b8bee-cc86-4613-9c52-1fe7696cdd3f.png)
 
 
 
@@ -693,10 +692,7 @@ int maxSumEven(int A[], int n){
 
 
 ## LUNGHEZZA DELLA PIU LUNGA SOTTOSEQUENZA PIU CHE DOPPIA NEL VETTORE
-
-![image-20210723161158885](/home/andrea/.config/Typora/typora-user-images/image-20210723161158885.png)
-
-
+![image](https://user-images.githubusercontent.com/33253698/126801955-9f83296b-293b-4946-89a6-dfb7893a978c.png)
 
 
 
@@ -755,8 +751,8 @@ bool coloring(Graph G, int k, int S[], int u){
 ## COLORING CON GAP
 
 >  assegnamento dei numeri da 1 a n <u>una volta</u> in cui non posso assegnare due colori uguali/consecutivi a due nodi adiacenti
+![image](https://user-images.githubusercontent.com/33253698/126802011-cdb57bb5-08d2-4341-a577-8776ac0ba8f9.png)
 
-![image-20210723161338898](/home/andrea/.config/Typora/typora-user-images/image-20210723161338898.png)
 
 
 
@@ -1054,16 +1050,20 @@ int[][] maxFlox(Graph G, Node S, Node T, int c[][]){
 
 
 ## POSIZIONARE TORRI SU SCACCHIERA
-
-![image-20210723155541077](/home/andrea/.config/Typora/typora-user-images/image-20210723155541077.png)
-![image-20210723155555093](/home/andrea/.config/Typora/typora-user-images/image-20210723155555093.png)
+![image](https://user-images.githubusercontent.com/33253698/126802066-867c9dee-1368-4351-905c-b6f8befe6234.png)
+![image](https://user-images.githubusercontent.com/33253698/126802090-0af9d14a-202e-4fa1-8f24-42c7954672bb.png)
 
 
 
 ## MINIMI SKIPASS
+![image](https://user-images.githubusercontent.com/33253698/126802116-31d55a04-3139-4aa2-997a-7ec107752109.png)
+![image](https://user-images.githubusercontent.com/33253698/126802133-a200227a-9647-47ac-9d91-19cfb9206f94.png)
 
-![image-20210723160141738](/home/andrea/.config/Typora/typora-user-images/image-20210723160141738.png)
-![image-20210723160121315](/home/andrea/.config/Typora/typora-user-images/image-20210723160121315.png)
+
+## ESPERIMENTI AL CERN
+![image](https://user-images.githubusercontent.com/33253698/126801718-0755f963-4fa1-4776-a9e1-ad0a0e1417b9.png)
+![image](https://user-images.githubusercontent.com/33253698/126801736-c6ddb511-09c3-413f-bca5-d0214bfdb0b7.png)
+![image](https://user-images.githubusercontent.com/33253698/126801752-673062cc-1edd-479d-813c-9aab1577666a.png)
 
 
 
