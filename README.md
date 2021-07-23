@@ -557,8 +557,6 @@ int countPercorsi(int M[][], int m, int n){
     return DP[0][0]
 }
 ```
-> Se ho anche un budget e ogni casella mi indica il costo, diventa tridimensionale
-> ![image](https://user-images.githubusercontent.com/33253698/126708520-b1326942-ab8b-45fd-a00c-bae7136aa6df.png)
 
 
 <br>
@@ -802,6 +800,7 @@ int longestPathRec(int M[][], int n, int m, int i, int j){
 <br>
 
 ## CICLI HAMILTONIANI IN UN GRAFO
+Complex: $O(n!)$
 ```py
 printHamilton(Graph G){
     bool visited[] = new bool[0...G.length] = {False}
@@ -990,6 +989,12 @@ int[][] maxFlox(Graph G, Node S, Node T, int c[][]){
 ![image](https://user-images.githubusercontent.com/33253698/126554314-839ddfa9-7e45-46e0-a8a7-819937d19ac6.png)
 
 
+<br>
+
+## CANTIERI
+![image](https://user-images.githubusercontent.com/33253698/126769075-5e2103aa-3051-4591-9028-8453a0f46ffb.png)
+![image](https://user-images.githubusercontent.com/33253698/126769103-4cf92f62-c6ff-49ca-8c66-b69947359792.png)
+
 
 <br><hr><br>
 
@@ -1030,8 +1035,7 @@ Il cammino minimo da _s_ ad _u_ è un cammino il cui costo è minore o uguale di
 Funziona bene solo con pesi positivi. Sfrutta le code con priorità (inzialmente basate su vettori, con costo O(n)).
 Estraggo il nodo con priorità minima e cancello la sua priorità
 
-Ho complessità O(n^2)
-IMMAGINE PAG 27
+![image](https://user-images.githubusercontent.com/33253698/126769218-c994de73-629c-4131-9ef7-a7bda36cd1e1.png)
 
 <br>
 
@@ -1048,14 +1052,14 @@ Code con priorità, basate però su heap di Fibonacci che riduce il costo *ammor
 ### Bellman-Ford-Moore
 È più pesante di Dijkstra, ma funziona con archi di peso negativo. Utilizzo una coda. Non faccio nulla nel caso in cui il nodo sia già nella coda. Ha complessità O(nm) perche ogni nodo puo essere estratto massimo n-1 volte.
 
-IMMAGINE PAG 37
+![image](https://user-images.githubusercontent.com/33253698/126769261-ab340ee0-fc52-4691-870d-61ac5d07bf14.png)
 
 <br>
 
 ### DAG
 Poiche non esistono cicli non rischio di tornare su un nodo gia visitato e abbassare il valore della sua distanza. Posso utilizzare l'ordinamento topologico
 
-IMMAGINE PAG 39
+![image](https://user-images.githubusercontent.com/33253698/126769289-db34e380-0432-4b9b-a1ef-15f0b83914a9.png)
 
 
 <br>
