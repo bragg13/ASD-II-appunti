@@ -891,6 +891,13 @@ generate(int n){
 
 <br>
 
+## VETTORE k-ALTERNATO - tutti i sottovett. de/cresc contigui nel vettore hanno length <= k
+![image](https://   user-images.githubusercontent.com/33253698/126791607-29ef7bc2-4eb4-46db-8d45-d00c2e2d31c0.png)
+
+
+
+<br>
+
 ## STAMPARE TUTTE LE POSSIBILI PARENTESIZZAZIONI COMPOSTE DA N COPPIE DI PARENTESI
 Complex: $\Omega(ncdot 2^n)$
 ```py
