@@ -170,6 +170,7 @@ int lcs(int T[], int U[], int n, int m){
             else:
                 DP[i][j] = max( DP[i-1][j], DP[i][j-1] ) # se son diversi, calcolo la migliore che avrei togliendo l'ultimo carattere ad ognuno
                 # - DP[i][j] = 0
+		# scs: DP[i][j] = min(DP[i-1][j], DP[i][j-1]) + 1
     return DP[n][m]
     # - return maxSoFar
 }
@@ -327,6 +328,12 @@ SET indipendentSet(int a[], int b[]){
     return S
 }
 ```
+
+
+<br>
+
+## LUNGHEZZA DEL PIU LUNGO SOTTOVETTORE CONTIGUO FORMATO DA K VALORI 0 SEGUITI DA K VALORI 1
+
 
 
 <br>
@@ -569,6 +576,12 @@ int limRec(int v[], int i, int r, int j, int DP[][]){
 
 <br>
 
+## MODI IN CUI È POSSIBILE INTERPRETARE IL CODICE
+![image](https://user-images.githubusercontent.com/33253698/126803582-d4ac247d-f5f6-420d-87e0-61c8a401c8f4.png)
+
+
+<br>
+
 ## SCACCHIERA - numero di percorsi distinti da 0,0 a m,n (0/1 se attraversabile o meno)
 ```py
 int countPercorsi(int M[][], int m, int n){
@@ -648,6 +661,12 @@ int countRec(int V[], int i, int r, int DP[][]){
     return DP[i][r]
 }
 ```
+
+
+<br>
+
+## QUANTE VOLTE PATTERN APPARE COME SOTTOSEQUENZA DI T
+![image](https://user-images.githubusercontent.com/33253698/126809222-2d3e56d1-69cc-4a26-9d83-74ace507e96d.png)
 
 
 <br>
@@ -940,6 +959,12 @@ generate(int n){
 ## VETTORE k-ALTERNATO - tutti i sottovett. de/cresc contigui nel vettore hanno length <= k
 ![image](https://   user-images.githubusercontent.com/33253698/126791607-29ef7bc2-4eb4-46db-8d45-d00c2e2d31c0.png)
 
+
+
+<br>
+
+## PIU PICCOLO NUMERO DI SOTTOSTRINGHE PALINDROME
+![image](https://user-images.githubusercontent.com/33253698/126807314-a4f26855-beac-4c66-a679-ac0ef7e933e9.png)
 
 
 <br>
