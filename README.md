@@ -523,11 +523,6 @@ int partitionRec(int V[], int tot[], int DP[][], int i, int t){
 
 <br>
 
-## VETTORE K ALTERNATO - tutti i sottovettori de/crescenti contigui contenuti nel vettore hanno lunghezza <= k
-
-
-<br>
-
 ## MASSIMIZZARE NUMERO DI MONETE PER PAGARE T - problema del resto
 ```py
 int maxResto(int V[], int i, int t, int DP[][]){
