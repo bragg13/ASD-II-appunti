@@ -313,6 +313,24 @@ computePredecessor(int a[], int b[], int n){
 
 <br>
 
+## INSIEME INDIPENDENTE MASSIMALE DI INTERVALLI
+Complex: $O(nlogn)$
+```py
+SET indipendentSet(int a[], int b[]){
+    SET S = Set()
+    S.insert(1)
+    int last = 1
+    for i=2 to n:
+        if a[i] >= b[last]:
+            S.insert(i)
+            last = i
+    return S
+}
+```
+
+
+<br>
+
 ## MASSIMA SOTTOSEQUENZA CRESCENTE
 Complex: $O(n^2)$
 ```py
@@ -331,6 +349,15 @@ int longestIncreasing(int V[], int n){
     
     return _max
     # return max(DP)
+}
+int maxIncreasing(int V[], int n){
+	int DP[] = new int[0...n]
+	for i=0 to n:
+		DP[i] = A[i]
+		for j=0 to i-1:
+			if A[j] < A[i]:
+				DP[i] = max(DP[i], DP[j] + A[i])
+	return max(DP, n)
 }
 ```
 
@@ -496,6 +523,11 @@ int partitionRec(int V[], int tot[], int DP[][], int i, int t){
 
 <br>
 
+## VETTORE K ALTERNATO - tutti i sottovettori de/crescenti contigui contenuti nel vettore hanno lunghezza <= k
+
+
+<br>
+
 ## MASSIMIZZARE NUMERO DI MONETE PER PAGARE T - problema del resto
 ```py
 int maxResto(int V[], int i, int t, int DP[][]){
@@ -575,8 +607,13 @@ minMoves(int V[], int n){
 }
 ```
 
-
 <br>
+
+## NUMERO DI ALBERI 1 BILANCIATI DIVERSI DI ALTEZZA H
+
+![image-20210723160941511](/home/andrea/.config/Typora/typora-user-images/image-20210723160941511.png)
+
+
 
 ## DADI - numero di modi diversi con cui ottenere una certa somma
 ![image](https://user-images.githubusercontent.com/33253698/126070133-a1303e79-83ce-45bd-82f1-708d219f5a07.png)
@@ -659,7 +696,18 @@ int maxSumEven(int A[], int n){
 ```
 
 
-<br><hr><br>
+
+## LUNGHEZZA DELLA PIU LUNGA SOTTOSEQUENZA PIU CHE DOPPIA NEL VETTORE
+
+![image-20210723161158885](/home/andrea/.config/Typora/typora-user-images/image-20210723161158885.png)
+
+
+
+
+
+<hr><br>
+
+
 
 
 # === Backtracking ===
@@ -707,8 +755,15 @@ bool coloring(Graph G, int k, int S[], int u){
 }
 ```
 
-
 <br>
+
+## COLORING CON GAP
+
+>  assegnamento dei numeri da 1 a n <u>una volta</u> in cui non posso assegnare due colori uguali/consecutivi a due nodi adiacenti
+
+![image-20210723161338898](/home/andrea/.config/Typora/typora-user-images/image-20210723161338898.png)
+
+
 
 ## PRINT SUMS - stampare tutti i modi in cui posso ottenere w sommando i valori di X[]
 Complex: $O(n\cdot 2^n)$
@@ -988,12 +1043,26 @@ int[][] maxFlox(Graph G, Node S, Node T, int c[][]){
 ## HATEVILLE
 ![image](https://user-images.githubusercontent.com/33253698/126554314-839ddfa9-7e45-46e0-a8a7-819937d19ac6.png)
 
-
 <br>
 
 ## CANTIERI
 ![image](https://user-images.githubusercontent.com/33253698/126769075-5e2103aa-3051-4591-9028-8453a0f46ffb.png)
 ![image](https://user-images.githubusercontent.com/33253698/126769103-4cf92f62-c6ff-49ca-8c66-b69947359792.png)
+
+
+
+## POSIZIONARE TORRI SU SCACCHIERA
+
+![image-20210723155541077](/home/andrea/.config/Typora/typora-user-images/image-20210723155541077.png)
+![image-20210723155555093](/home/andrea/.config/Typora/typora-user-images/image-20210723155555093.png)
+
+
+
+## MINIMI SKIPASS
+
+![image-20210723160141738](/home/andrea/.config/Typora/typora-user-images/image-20210723160141738.png)
+![image-20210723160121315](/home/andrea/.config/Typora/typora-user-images/image-20210723160121315.png)
+
 
 
 <br><hr><br>
